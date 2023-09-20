@@ -5,8 +5,6 @@ abstract class CountState {}
 
 class CountInitial extends CountState {}
 
-class NumberChange extends CountState{
-  final int number;
-
-  NumberChange(this.number);
+class NumberChange extends CountState {
+  NumberChange();
 }

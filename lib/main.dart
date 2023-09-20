@@ -20,25 +20,33 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  TextEditingController text = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
             child: BlocBuilder<CountCubit, CountState>(
               builder: (context, state) {
                 if (state is CountInitial) {
-                  return Text("0");
+                  return Text(text.text);
                 } else {
-                  return Text("${(state as NumberChange).number}");
+                  return Text("${text.text}");
                 }
               },
             ),
+          ),TextField(
+            controller: text,
+            decoration: InputDecoration(border: OutlineInputBorder(),hintText: "Text"),
           ),
-          FloatingActionButton(onPressed: () {
-            BlocProvider.of<CountCubit>(context).numberChange();
-          })
+          FloatingActionButton(
+            onPressed: () {
+              BlocProvider.of<CountCubit>(context).numberChange();
+            },
+            child: Icon(Icons.add),
+          )
         ],
       ),
     );
